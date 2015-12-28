@@ -1,0 +1,15 @@
+{
+  "name": "Wise",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node_modules/react-native/packager/packager.sh"
+  },
+  "dependencies": {
+    "htmlparser2": "^3.9.0",
+    "react-native": "0.17.0"
+  },
+  "devDependencies": {
+    "react-native-cli": "^0.1.7"
+  }
+}
