@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "htmlparser2": "^3.9.0",
+    "lodash": "^3.10.1",
     "react-native": "0.17.0"
   },
   "devDependencies": {
