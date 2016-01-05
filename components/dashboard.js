@@ -12,7 +12,8 @@ let {
 } = React;
 
 
-import net from '../lib/server';
+import net from '../lib/net';
+import Store from '../store';
 
 import Post from './Post';
 
@@ -25,7 +26,6 @@ var Dashboard = React.createClass({
     };
   },
   getInitialState: function(){
-    console.log('class init');
     let posts = [];
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id});
     return {
@@ -34,11 +34,19 @@ var Dashboard = React.createClass({
     };
   },
   componentDidMount: function(){
-    this.loadMore();
+    // this.loadMore();
+    Store.addChangeListener(this.storeChangeHandler);
+  },
+  componentWillUnmount: function() {
+    Store.removeChangeListener(this.storeChangeHandler);
+  },
+  storeChangeHandler: function(){
+    let posts = Store.getDashboard();
+    this.loaded(posts);
   },
   loaded: function(data){
-    // console.log(JSON.stringify(data, null, 4));
-    let newDS = this.state.posts.concat(data);
+    // let newDS = this.state.posts.concat(data);
+    let newDS = data;
     this.setState({
       posts: newDS,
       dataSource: this.state.dataSource.cloneWithRows(newDS)
@@ -63,10 +71,15 @@ var Dashboard = React.createClass({
       </ListView>
     );
   },
+  renderLoading: function(){
+    return <Text style={styles.loadingText}>正在载入...</Text>;
+  },
   render: function(){
+    let { posts } = this.state;
+    let content = posts.length? this.renderList() : this.renderLoading();
     return (
       <View style={styles.body}>
-        {this.renderList()}
+        {content}
       </View>
     );
   },
@@ -80,8 +93,8 @@ var Dashboard = React.createClass({
 var styles = StyleSheet.create({
   body: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     backgroundColor: '#1B1D20'
   },
   welcome: {
@@ -89,6 +102,13 @@ var styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
     color: '#fff'
+  },
+  loadingText: {
+    textAlign: 'center',
+    fontSize: 20,
+    color: 'rgba(255,255,255,0.8)',
+    // fontWeight: 'bold',
+    marginTop: 100
   }
 });
 

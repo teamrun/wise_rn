@@ -10,7 +10,7 @@ let {
 } = React;
 
 const DIVICE_WIDTH = Dimensions.get('window').width;
-const navBarBGC = '#104F67';
+const navBarBGC = '#35455D';
 
 const NAV_OPTS = [
   {
@@ -67,8 +67,8 @@ let styles = StyleSheet.create({
     backgroundColor: navBarBGC
   },
   navItem: {
-    width: 30,
-    height: 30,
+    width: 24,
+    height: 24,
     // opacity: 0.5
     // backgroundColor: '#fff'
   }

@@ -30,7 +30,10 @@ let Post = React.createClass({
       };
       var imgSrc = {uri: sizeP.url};
 
-      return <Image style={[style, styles.image]} source={imgSrc} />;
+      return <Image
+        style={[style, styles.image]}
+        source={imgSrc}
+      />;
     }
     return;
   },
@@ -80,6 +83,14 @@ let Post = React.createClass({
 
   showPhotoInModal: function(e){
     // console.log(this.props.);
+  },
+  handleLoadStart: function(e){
+    let url = this.props.data.photos[0].original_size.url.replace('http://chenllos.com:9016/fileproxy?url=', '');
+    console.log('start: ' + url);
+  },
+  handleLoadEnd: function(){
+    let url = this.props.data.photos[0].original_size.url.replace('http://chenllos.com:9016/fileproxy?url=', '');
+    console.log('done: ' + url);
   }
 });
 
