@@ -6,10 +6,10 @@ import Likes from './likes';
 
 let coms = {
   Dashboard: () => {
-    return <Dashboard />;
+      return <Dashboard {...this.props}/>;
   },
   Likes: () => {
-    return <Likes />;
+    return <Likes {...this.props}/>;
   }
 };
 

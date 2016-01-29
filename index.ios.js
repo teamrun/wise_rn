@@ -42,6 +42,7 @@ var Wise = React.createClass({
         initialRoute={{name: 'Dashboard', index: 0}}
         renderScene={(route, navigator) =>
           <App
+            {...this.props}
             name={route.name}
             onForward={() => {
               var nextIndex = route.index + 1;
