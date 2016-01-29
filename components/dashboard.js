@@ -14,10 +14,11 @@ let {
 
 import net from '../lib/net';
 import Store from '../store';
+import Action from '../store/actions';
 
 import Post from './Post';
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 5;
 
 var Dashboard = React.createClass({
   getDefaultProps: function() {
@@ -43,6 +44,7 @@ var Dashboard = React.createClass({
   storeChangeHandler: function(){
     let posts = Store.getDashboard();
     this.loaded(posts);
+    console.log('store changed');
   },
   loaded: function(data){
     // let newDS = this.state.posts.concat(data);
@@ -53,10 +55,13 @@ var Dashboard = React.createClass({
     });
   },
   loadMore: function(){
-    net.dashboard(this.props.user, {
-      limit: PAGE_SIZE,
-      offset: this.state.posts.length
-    }).then(this.loaded);
+    let alreadLoadedPostsCount = Store.getLoadedPostsCount();
+    console.log('gonna load more, alread have:', alreadLoadedPostsCount);
+    Action.fetchMoreDashboard(this.props.user, alreadLoadedPostsCount);
+  },
+  renderPost: function(data){
+    let author = Store.getBlogInfo(data.blog_name);
+    return <Post data={data} author={author} />;
   },
 
   renderList: function(){
@@ -66,13 +71,13 @@ var Dashboard = React.createClass({
         pageSize={4}
         onEndReached={this.onEndReached}
         dataSource={this.state.dataSource}
-        renderRow={(data) => <Post data={data} />}
+        renderRow={this.renderPost}
       >
       </ListView>
     );
   },
   renderLoading: function(){
-    return <Text style={styles.loadingText}>正在载入...</Text>;
+    return <Text style={styles.loadingText}>Loading...</Text>;
   },
   render: function(){
     let { posts } = this.state;
@@ -84,7 +89,6 @@ var Dashboard = React.createClass({
     );
   },
   onEndReached: function(){
-    console.log('reach end');
     this.loadMore();
   }
 });

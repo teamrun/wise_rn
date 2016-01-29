@@ -37,6 +37,16 @@ let Post = React.createClass({
     }
     return;
   },
+  renderHeader: function(author){
+    return (
+      <View style={styles.postHeader}>
+        <View style={styles.avatarCtn}>
+          <Image style={styles.avatar} source={{uri: author.avatar}} />
+        </View>
+        <Text style={styles.blogName}>{author.name}</Text>
+      </View>
+    );
+  },
   renderPhoto: function(p){
     let img = this.getPhoto(p);
     if(img){
@@ -68,13 +78,15 @@ let Post = React.createClass({
     );
   },
   render: function(){
-    let p = this.props.data;
+    let { data: p, author } = this.props;
     let image = this.getPhoto(p);
     let textContent = this.getTextContent(p);
 
+    let postHeader = author? this.renderHeader(author) : undefined;
+
     return (
       <View key={p.id} style={styles.postCtn}>
-        <Text style={styles.blogName}>{p.blog_name}</Text>
+        {postHeader}
         {image}
         {textContent}
       </View>
@@ -97,17 +109,37 @@ let Post = React.createClass({
 
 let styles = StyleSheet.create({
   postCtn:{
-    position: 'relative',
+    flex: 1,
     marginBottom: 20,
-    maxWidth: DIVICE_WIDTH,
+    width: DIVICE_WIDTH,
     backgroundColor: '#fff',
   },
+  postHeader: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: DIVICE_WIDTH,
+    height: 50,
+    padding: 5
+  },
+  avatarCtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 5,
+    shadowColor: 'black',
+    shadowOffset: {width: 0, height: 0},
+    shadowOpacity: 0.25,
+    shadowRadius: 3
+  },
+  avatar: {
+    width: 40,
+    height: 40,
+    borderRadius: 5
+  },
   blogName: {
-    position: 'absolute',
-    top: 10,
-    left: 10,
-    color: '#333',
-    marginLeft: 10
+    position: 'relative',
+    marginLeft: 10,
+    marginTop: -5
   },
   image: {
     position: 'relative'
