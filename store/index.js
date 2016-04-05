@@ -8,7 +8,8 @@ let store = {
   // tumblr开放出来的接口, 只能通过offset翻页
   // 会出现 有新的post 客户端不知道, 翻页offset不准确的问题
   // 下拉刷新时重置这个值
-  newlyPostsCount: 0
+  newlyPostsCount: 0,
+  dashboard: []
 };
 var CHANGE_EVENT = 'change';
 
