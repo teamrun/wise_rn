@@ -3,10 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node_modules/react-native/packager/packager.sh"
+    "start": "node_modules/react-native/packager/packager.sh",
+    "clean:fbjs": "find ./node_modules -name \"fbjs\" -type d -prune -exec sh -c 'if [ {} != \"./node_modules/fbjs\" ]; then rm -rf {};fi' \\;",
+    "clean:babelrc": "find ./node_modules -name react-packager -prune -o -name '.babelrc' -print | xargs rm -f",
+    "postinstall": "npm run clean:babelrc && npm run clean:fbjs"
   },
   "dependencies": {
     "events": "^1.1.0",
+    "fbjs": "^0.6.0",
     "flux": "^2.1.1",
     "htmlparser2": "^3.9.0",
     "keymirror": "^0.1.1",

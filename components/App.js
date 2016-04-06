@@ -5,11 +5,11 @@ import Dashboard from './dashboard';
 import Likes from './likes';
 
 let coms = {
-  Dashboard: () => {
-      return <Dashboard {...this.props}/>;
+  Dashboard: (props) => {
+      return <Dashboard {...props}/>;
   },
-  Likes: () => {
-    return <Likes {...this.props}/>;
+  Likes: (props) => {
+    return <Likes {...props}/>;
   }
 };
 
@@ -17,6 +17,7 @@ export default React.createClass({
   render: function(){
     // console.log(this.props.name);
     // console.log(coms[this.props.name]);
-    return coms[this.props.name]();
+    console.log(this.props);
+    return coms[this.props.name](this.props);
   }
 });

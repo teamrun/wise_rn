@@ -21,12 +21,8 @@ let heartBeatLoading = require('../assets/heart-beat.gif');
 const PAGE_SIZE = 5;
 
 var Dashboard = React.createClass({
-  getDefaultProps: function() {
-    return {
-      user: 'libertyartchen'
-    };
-  },
   getInitialState: function(){
+    console.log(this.props);
     Action.initLoad(this.props.user);
 
     return {
