@@ -6,10 +6,10 @@
 
 import React from 'react-native';
 
-import App from './components/App';
-import NavBar from './components/NavBar';
+import App from './script/components/App';
+import NavBar from './script/components/NavBar';
 
-import Action from './store/actions';
+import Action from './script/store/actions';
 
 let {
   AppRegistry,

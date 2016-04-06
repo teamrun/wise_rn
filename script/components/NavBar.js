@@ -17,12 +17,12 @@ const NAV_OPTS = [
     name: 'Dashboard',
     index: 0,
     // 引用本地图片 直接require!!
-    img: require('../assets/home_white.png')
+    img: require('../../assets/home_white.png')
   },
   {
     name: 'Likes',
     index: 0,
-    img: require('../assets/heart_white.png')
+    img: require('../../assets/heart_white.png')
   },
 ];
 
