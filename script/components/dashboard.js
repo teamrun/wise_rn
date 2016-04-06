@@ -17,12 +17,11 @@ import Action from '../store/actions';
 import Post from './Post';
 import WistLitView from './WiseListView';
 
-let heartBeatLoading = require('../assets/heart-beat.gif');
+let heartBeatLoading = require('../../assets/heart-beat.gif');
 const PAGE_SIZE = 5;
 
 var Dashboard = React.createClass({
   getInitialState: function(){
-    console.log(this.props);
     Action.initLoad(this.props.user);
 
     return {
