@@ -7,22 +7,26 @@ let graphqlAPI = 'http://chenllos.com:9016/graphql';
 let makeGraphqlCall = (query) => {
   let body = new FormData(), method = 'POST';
   body.append('query', query);
-
+  // console.log(query);
   return fetch(graphqlAPI, { method, body })
-    .then((resp) => resp.json());
+    .then((resp) => resp.json())
+    .then((data) => {
+      // console.log(data);
+      return data;
+    });
 };
 
 /*
  * pageOpt: Number: limit, skip
  *          String: sinceId
  */
-module.exports = {
+export default {
   dashboard: (user, pageOpt) => {
     let param = Object.assign({}, pageOpt, {user});
 
     return makeGraphqlCall(Frag.dashboard(param))
       .then((d) => {
-        if(d.error){
+        if(d.errors){
           console.error(d);
           return [];
         }

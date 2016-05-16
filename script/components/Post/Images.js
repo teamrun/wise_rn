@@ -2,20 +2,20 @@
  * post的图片内容
  */
 
-import React from 'react-native';
+import React from 'react';
 import Dimensions from 'Dimensions';
 
 
 const DIVICE_WIDTH = Dimensions.get('window').width;
 
-let {
+import {
   StyleSheet,
   View,
   Image,
   Text,
 
   TouchableWithoutFeedback
-} = React;
+} from 'react-native';
 
 let Images = React.createClass({
   getPhoto(photoItem) {

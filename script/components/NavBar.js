@@ -1,13 +1,13 @@
-import React from 'react-native';
+import React from 'react';
 import Dimensions from 'Dimensions';
 
-let {
+import {
   StyleSheet,
   Image,
   View,
 
   TouchableHighlight
-} = React;
+} from 'react-native';
 
 const DIVICE_WIDTH = Dimensions.get('window').width;
 const navBarBGC = '#35455D';

@@ -2,15 +2,15 @@
  * post的头部
  */
 
-import React from 'react-native';
+import React from 'react';
 import Dimensions from 'Dimensions';
 
-let {
+import {
   StyleSheet,
   View,
   Text,
   Image
-} = React;
+} from 'react-native';
 const DIVICE_WIDTH = Dimensions.get('window').width;
 
 let PostHeader = React.createClass({

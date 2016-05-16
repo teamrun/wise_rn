@@ -2,18 +2,17 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
-'use strict';
 
-var React = require('react-native');
-var {
+import React, { Component } from 'react';
+import {
   AppRegistry,
   StyleSheet,
   Text,
-  View,
-} = React;
+  View
+} from 'react-native';
 
-var Wise = React.createClass({
-  render: function() {
+class wiseClient extends Component {
+  render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -28,9 +27,9 @@ var Wise = React.createClass({
       </View>
     );
   }
-});
+}
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -49,4 +48,4 @@ var styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('Wise', () => Wise);
+AppRegistry.registerComponent('wiseClient', () => wiseClient);

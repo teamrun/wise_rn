@@ -14,7 +14,7 @@ const BlogInfoFields = `{
   avatar
 }`;
 
-let fragment_dashboard = `{
+let fragment_dashboard = `query{
   dashboard({}){
     id
     blog_name

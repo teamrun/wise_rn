@@ -2,16 +2,16 @@
  * post中除图片置为的文本部分
  */
 
-import React from 'react-native';
+import React from 'react';
 import Dimensions from 'Dimensions';
 
 import html2view from '../../lib/html2view';
 
-let {
+import {
   StyleSheet,
   View,
   Text
-} = React;
+} from 'react-native';
 
 const DIVICE_WIDTH = Dimensions.get('window').width;
 const FONT_SIZE = 16;

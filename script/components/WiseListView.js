@@ -1,11 +1,12 @@
-import React from 'react-native';
-let {
+import React, {
+  PropTypes
+} from 'react';
+import {
   StyleSheet,
   Text,
   View,
-  ListView,
-  PropTypes
-} = React;
+  ListView
+} from 'react-native';
 
 let noop = () => undefined;
 /*

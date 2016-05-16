@@ -1,4 +1,4 @@
-import React from 'react-native';
+import React from 'react';
 import Dimensions from 'Dimensions';
 
 
@@ -7,12 +7,12 @@ import Images from './Images';
 import TextContent from './TextContent';
 
 
-let {
+import {
   StyleSheet,
   View,
 
   TouchableWithoutFeedback
-} = React;
+} from 'react-native';
 
 const DIVICE_WIDTH = Dimensions.get('window').width;
 
@@ -20,13 +20,12 @@ let Post = React.createClass({
   render: function(){
     let { data: p, author } = this.props;
 
-    let postHeader =  <PostHeader author = {author} />;
+    // let postHeader =  <PostHeader author = {author} />;
     let image =       <Images photos = {p.photos} />;
     let textContent = <TextContent post = {p} />;
 
     return (
       <View key={p.id} style={styles.postCtn}>
-        {postHeader}
         {image}
         {textContent}
       </View>

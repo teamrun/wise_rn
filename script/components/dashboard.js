@@ -1,5 +1,5 @@
-import React from 'react-native';
-let {
+import React from 'react';
+import {
   AppRegistry,
   StyleSheet,
   Text,
@@ -7,23 +7,20 @@ let {
   View,
   ListView,
   TouchableWithoutFeedback
-} = React;
+} from 'react-native';
+import { connect } from 'react-redux';
 
 
 import net from '../lib/net';
-import Store from '../store';
-import Action from '../store/actions';
 
 import Post from './Post';
-import WistLitView from './WiseListView';
+import WiseListView from './WiseListView';
 
 let heartBeatLoading = require('../../assets/heart-beat.gif');
 const PAGE_SIZE = 5;
 
 var Dashboard = React.createClass({
   getInitialState: function(){
-    Action.initLoad(this.props.user);
-
     return {
       posts: [],
       initLoading: false,
@@ -31,15 +28,14 @@ var Dashboard = React.createClass({
     };
   },
   componentDidMount: function(){
-    // this.loadMore();
-    Store.addChangeListener(this.storeChangeHandler);
+    // Store.addChangeListener(this.storeChangeHandler);
   },
   componentWillUnmount: function() {
-    Store.removeChangeListener(this.storeChangeHandler);
+    // Store.removeChangeListener(this.storeChangeHandler);
   },
   storeChangeHandler: function(){
-    let posts = Store.getDashboard();
-    this.loaded(posts);
+    // let posts = Store.getDashboard();
+    // this.loaded(posts);
     // console.log('store changed');
   },
   loaded: function(data){
@@ -50,8 +46,8 @@ var Dashboard = React.createClass({
     });
   },
   loadMore: function(){
-    let alreadLoadedPostsCount = Store.getLoadedPostsCount();
-    Action.fetchMoreDashboard(this.props.user, alreadLoadedPostsCount);
+    // let alreadLoadedPostsCount = Store.getLoadedPostsCount();
+    // Action.fetchMoreDashboard(this.props.user, alreadLoadedPostsCount);
     let stateUpdates = {};
     if(alreadLoadedPostsCount > 0){
       stateUpdates.moreLoading = true;
@@ -62,23 +58,23 @@ var Dashboard = React.createClass({
     this.setState(stateUpdates);
   },
   renderPost: function(data){
-    let author = Store.getBlogInfo(data.blog_name);
-    return <Post data={data} author={author} />;
+    // let author = Store.getBlogInfo(data.blog_name);
+    return <Post data={data} />;
   },
   render: function(){
-    let { posts, initLoading, moreLoading } = this.state;
+    let { posts, status } = this.props;
     // let content = posts.length? this.renderList() : this.renderLoading();
+    console.log(this.props);
     return (
       <View style={styles.body}>
-        <WistLitView
+        <WiseListView
           rowData = {posts}
           renderRow = {this.renderPost}
-          loading = {initLoading}
-          moreLoading = {moreLoading}
-          endReachHandler = {this.loadMore}
+          status = {status}
         />
       </View>
     );
+    
   },
   onEndReached: function(){
     this.loadMore();
@@ -89,8 +85,6 @@ var Dashboard = React.createClass({
 var styles = StyleSheet.create({
   body: {
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
     backgroundColor: '#1B1D20'
   },
   welcome: {
@@ -101,4 +95,14 @@ var styles = StyleSheet.create({
   }
 });
 
-export default Dashboard;
+export default connect((state) => {
+  // posts, pids, status
+  let ret = {
+    status: state.dashboard.status,
+    posts: state.dashboard.pids.map((id) => {
+      return state.posts[id]
+    })
+  };
+  console.log(ret);
+  return ret;
+}, (dispatch) => ({}))(Dashboard);

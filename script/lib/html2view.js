@@ -1,14 +1,14 @@
-import React from 'react-native';
+import React from 'react';
 import _ from 'lodash';
 
 import htmlParser from '../vendor/htmlparser';
 
-let {
+import {
   StyleSheet,
   View,
   Text,
   Image
-} = React;
+} from 'react-native';
 
 
 let styles = StyleSheet.create({

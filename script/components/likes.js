@@ -1,11 +1,11 @@
-import React from 'react-native';
+import React from 'react';
 
-let {
+import {
   StyleSheet,
   View,
   Text,
   Image
-} = React;
+} from 'react-native';
 
 let Likes = React.createClass({
   render: function(){
